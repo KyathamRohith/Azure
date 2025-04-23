@@ -9,11 +9,9 @@ Key Characteristics:
   Ideal for workloads requiring custom configurations or where the customer wants to retain control over the infrastructure.
 
 Examples of IaaS in Azure:
-   Virtual Machines (VMs): Allows you to create and manage scalable virtual machines that can run different operating systems and applications.
-
-   Azure Storage: A variety of storage options, including Blob Storage, Disk Storage, and File Storage, to manage your data.
-
-   Virtual Networks (VNet): A private network within Azure for securely connecting resources.
+   Virtual Machines (VMs)
+   Azure Storage
+   Virtual Networks (VNet)
 
 Use Cases of IaaS:
    Hosting websites or applications that need full control over their virtual machines.
@@ -22,6 +20,14 @@ Use Cases of IaaS:
 
    Extending on-premises infrastructure to the cloud.
 
+
+
+Different ways to access and create resources in Azure:
+
+    Azure ARM Template
+    Azure Bicep
+    Azure Portal
+    Terraform
 
 
 
@@ -37,11 +43,9 @@ Key Characteristics:
   PaaS is ideal for developing, testing, and deploying web applications without the need to manage infrastructure or hardware.
 
 Examples of PaaS in Azure:
-    Azure App Services (Web Apps): A fully managed platform for building and hosting web applications in various programming languages (e.g., .NET, Node.js, Java).
-
-    Azure SQL Database: A fully managed relational database with high availability and built-in intelligence for scaling and managing database workloads.
-
-    Azure Functions: A serverless compute service that lets you run event-driven code without managing the infrastructure.
+    Azure App Services (Web Apps)
+    Azure SQL Database
+    Azure Functions
 
 Use Cases of PaaS:
    Developing and deploying web or mobile applications.
@@ -65,11 +69,9 @@ Key Characteristics:
    Ideal for end-users or businesses who need a ready-to-use application for specific tasks.
 
 Examples of SaaS in Azure:
-    Office 365: A suite of productivity tools, including Word, Excel, PowerPoint, and Outlook, all delivered through the cloud.
-
-    Microsoft Teams: A collaboration platform that integrates chat, video meetings, file sharing, and other teamwork tools.
-
-    Azure DevOps: A set of development tools for managing the application lifecycle, from version control to build automation and deployment.
+    Office 365
+    Microsoft Teams
+    Azure DevOps
 
 Use Cases of SaaS:
    Using productivity tools like Office 365 for team collaboration and document management.
@@ -81,14 +83,19 @@ Use Cases of SaaS:
 
 
 
+Strategy- it is long term
+Tactics - it is Short term steps taken to solve Non Functional Requirements
+
+
+
 Azure Web App:
 Azure Web App is a fully managed platform for building, deploying, and scaling web apps. Azure Web Apps is a part of Azure App Service and provides a platform to host web applications, REST APIs, and mobile backends. Some key features:
 
-Automatic scaling and load balancing.
+   Automatic scaling and load balancing.
 
-Integration with databases and storage solutions.
+   Integration with databases and storage solutions.
 
-Support for multiple languages such as .NET, Java, Python, Node.js, and more.
+   Support for multiple languages such as .NET, Java, Python, Node.js, and more.
 
 
 
@@ -136,11 +143,6 @@ Common Attacks:
 
 Functional Requirements (FR):
 Functional requirements specify what a system should do. They describe the specific behaviors, actions, or functions the system must have to meet the needs of its users. Essentially, functional requirements define the capabilities of the system.
-
-Examples of Functional Requirements:
-    Login Feature: The system must allow users to log in using their email and password.
-
-    Order Processing: The system must allow customers to add items to their shopping cart and complete a checkout process.
 
     User Management: The system must allow administrators to create, edit, or delete user accounts.
 
@@ -254,7 +256,7 @@ Express Gateways:
 
 
 VNet/VPC Peering:
-VNet/VPC Peering allows virtual networks to connect to each other and share resources. It is typically used when resources are distributed across multiple VNets/VPCs.
+VNet/VPC Peering allows virtual networks to connect to each other and share resources. It is typically used when resources are distributed across multiple VNets.
 
 Key Requirement: The IP address ranges of the peered VNets must be different to avoid conflicts.
 
@@ -275,7 +277,5 @@ Azure Subscription & Resource Groups: Subscriptions are containers for billing a
 VM Scale Sets: Automatically scale VM instances based on demand. It integrates with Azure Load Balancer for distributing traffic across instances.
 
 Availability Sets: Distributes VMs across fault domains, ensuring that at least one instance of a VM remains available in case of hardware failure.
-
-
 
 
