@@ -279,3 +279,154 @@ VM Scale Sets: Automatically scale VM instances based on demand. It integrates w
 Availability Sets: Distributes VMs across fault domains, ensuring that at least one instance of a VM remains available in case of hardware failure.
 
 
+
+to create networks we need cidr 
+we have three 
+32-42=8 ---> 2^8---> 255
+10.0.0.0/24 ---> 10.0.0.0--- 10.0.0.255
+
+network--        1    2    4     8     16     32     64    128      256
+host--           256  128  64    32     16    8      4      2        1
+subnet mask--    /24  /25  /26   /27   /28    /29   /30     /31      /32
+
+
+we are dividing these into 4 ways: 10.0.0.0
+TEAMS     ip range                      newtwork id              boardcast id                   cidr
+
+A---  10.0.0.1---10.0.0.62               10.0.0.0                 10.0.0.63                   10.0.0.0/26      
+
+B---  10.0.0.65---10.0.0.126             10.0.0.64                10.0.0.127                  10.0.0.64/26 
+
+C---  10.0.0.129---10.0.0.190            10.0.0.128               10.0.0.191                  10.0.0.128/26 
+
+
+
+
+In this setup, you're organizing a virtual network in Azure with proper subnetting and access control using Network Security Groups (NSGs).
+
+1. Virtual Network (VNet):  
+   - Acts like a container for your entire cloud network setup.  
+
+2. Subnets:  
+   - You divided the VNet into three logical parts (subnets):  
+     - rohith-frontend: For frontend services (like web apps).  
+     - rohith-backend: For backend services (like APIs, databases).  
+     - rohith-private: For internal/secure systems (not publicly accessible).  
+
+3. Virtual Machines (VMs):  
+   - You created one VM inside each subnet with matching names. This keeps the setup clear and organized.
+
+4. Network Security Groups (NSGs):  
+   - By default, Azure assigns a security group — you **removed these defaults**.  
+   - You created your own NSGs:
+     - rohith-public: Used for both frontend and backend VMs — allows controlled public access.
+     - rohith-private: Used for the private VM — restricts it to private/internal access only.
+
+
+1. **Created a Virtual Network (VNet)**
+
+2. **Subnets Created:**
+   - `rohith-frontend`
+   - `rohith-backend`
+   - `rohith-private`
+
+3. Virtual Machines Created:
+   - One VM per subnet with the same name:
+     - rohith-frontend VM
+     - rohith-backend VM
+     - rohith-private VM
+
+4. Network Security Groups (NSGs):
+   - Removed default NSGs from all VMs.
+   - Created custom NSGs:
+     - `rohith-public`: Assigned to `rohith-frontend` and `rohith-backend` subnets.
+     - `rohith-private`: Assigned to `rohith-private` subnet.
+
+After creating new NSGs add rules to the public and private NSGs, In public add the inbound rule and allow ssh with priotiy 150 and In private allow the backend ip address with 105 priority and then deny with priority with 110.
+then we can access front to backend vm and then backend to private but we cannot access frontend to private.
+
+
+24/04/2025:
+
+
+Here we created new user account from the main account. how to create user account:
+    click on entra id and click on add then click create newuser
+    the enter then mail id and user name and the password 
+    In assignment section add group named azuregroup and then create
+After use can use the new user account and create virtual machine, etc..
+
+Vnet peering:
+
+here we need to create two vnet using commands:
+
+     az network vnet create --resource-group <resource_group_name> --name <vnet_name> --address-prefixes <ad>
+
+Then create two subnets:
+
+     az network vnet subnet create \
+  --resource-group <resource_group_name> \
+  --vnet-name <vnet_name> \
+  --name <subnet_name> \
+  --address-prefix <subnet_prefix>
+
+Then create VMs:
+   az vm create \
+ --resource-group <resource_group_name> \
+ --name <vm_name> \
+ --location <location> \
+ --image <vm_image> \
+ --vnet-name <vnet_name> \
+ --subnet <subnet_name> \
+ --admin-username <admin_username> \
+ --admin-password <admin_password>
+
+After creating vm allow icmp protocal for both vm1 and vm2 
+then check using ping
+
+Then create peering between two vnets using the command:
+
+# Peering from VNet-2 to VNet-1
+az network vnet peering create \
+  --name peer-vnet2-to-vnet1 \
+  --resource-group myResourceGroup \
+  --vnet-name myVNet2 \
+  --remote-vnet myVNet1 \
+  --allow-vnet-access
+
+# Peering from VNet-1 to VNet-2
+az network vnet peering create \
+  --name peer-vnet1-to-vnet2 \
+  --resource-group myResourceGroup \
+  --vnet-name myVNet1 \
+  --remote-vnet myVNet2 \
+  --allow-vnet-access
+
+
+SSH into One of the VMs and the check the ping using another vm private ip address viceversa..
+
+
+
+
+Then create new user account without adding group to it and create.
+ 
+Then open main account and give the role in subscription like reader or contributor and check weather it is working in newly created user account when we give reader role it does not have any access to modify or delete. when you change it to contributor you can delete and modify.
+
+Then create new useraccount and give the roles in resource group to new user account same vicevers..
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
